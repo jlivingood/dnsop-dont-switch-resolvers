@@ -191,8 +191,18 @@
 			an end user would get the incorrect record in a DNS response no matter what resolver 
 			they used.</t>
 			
-			<t>In contrast to this, DNSSEC-related mistakes, errors, or validation security failures would 
-				only affect end users of validating resolvers.</t>
+		<t>In contrast to this, DNSSEC-related mistakes, errors, or other validation security failures would 
+			only affect end users of those validating resolvers. That being said, different validating 
+			resolver operators may configure their servers slightly differently, have different server 
+		    	software, or have different server configurations, which can result in slightly different 
+			resolver validation behavior. It can also be the case that one resolver has cached a DNS 
+			resource record according to the TTL set by the authoritative domain administrator, while 
+			another resolver does not have that record cached (generally due to the timing of prior 
+			user queries for that name), which can also cause two resolvers to differ. Another reason 
+			for resolution variance may be that the authoritative DNS servers are responding differently 
+			to various DNS resolvers, perhaps to geographic differences, the nature of any delegations to 
+			Content Delivery Networks (CDNs), a regionally-focused Denial of Service (DoS) attack against 
+			an authoritative server, or a wide range of other potential reasons.</t>
             </section>
             
             <section title='Switching to a Non-Validating Resolver is NOT Recommended' 
@@ -201,13 +211,21 @@
 				not understand why a domain fails to validate on one network but not another (or with 
 				one DNS resolver but not another) 
 				<xref target='Comparison-to-Other-DNS-Misconfigurations'/>. As a result, they may 
-				consider switching to an alternative, non-validating resolver themselves. But if a 
+				consider or someone may recommend to them switching to an alternative, non-validating 
+				resolver themselves. But if a 
 				domain fails DNSSEC validation and is inaccessible, this could very well be due to a 
 				security-related issue. Changing to a non-validating resolver is a critical security 
-				downgrade and is not well advised.</t>
+				downgrade and is NOT advised.</t>
+		    
+			<t> DNSSEC validation failures may be due to genuine security 
+				problems, which DNSSEC validation was designed to protect against. In the 
+				same way that a Transport Layer Security (TLS) <xref target='RFC8446'/> 
+				certificate failure should not be bypassed or ignored, so too that 
+				DNSSEC validation failures should not be bypassed or ignored.</t>
 			
 			<t>As a recommended best practice: In order to be as safe and secure as possible, end users 
-				should not change to DNS servers that do not perform DNSSEC validation as a workaround.</t>
+				SHOULD NOT change to DNS resolvers that do not perform DNSSEC validation as a workaround 
+				when DNSSEC validation failures occur.</t>
 			
 			<t>Even if a website in a domain seems to look "normal" and valid, according to the DNSSEC 
 				protocol, that domain is not secure. Domains that fail DNSSEC validation may fail 
@@ -220,12 +238,14 @@
             <section title='Other Considerations' anchor='Other-Considerations' toc='include'>
            		
            		<section title='Security Considerations' anchor='Security-Considerations' toc='include'>
-            	<t>The use of a non-validating DNS recursive resolver has comparatively less security capabilities than 
+            	<t>The use of a non-validating DNS recursive resolver is comparatively less secure than using
 			a validating resolver, since one implements DNS Security Extensions and one does not.</t>
             	
             	<t>In the case of a DNSSEC validation failure, if an end user changes to a non-validating resolver they 
 			may subject themselves to increased security risks and threats against which DNS Security 
 			Extensions may have provided protection.</t>
+				
+		<t>Users SHOULD NOT switch to a non-validating resolver when a DNSSEC validation failure occurs.</t>
     			</section>
     			
     			<section title='Recommendations for Validating Resolver Operators' 
