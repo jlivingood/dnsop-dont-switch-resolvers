@@ -238,20 +238,7 @@
             
             <section title='Other Considerations' anchor='Other-Considerations' toc='include'>
            		
-           		<section title='Security Considerations' anchor='Security-Considerations' toc='include'>
-            	<t>The use of a non-validating DNS recursive resolver is comparatively less secure than using
-			a validating resolver, since one implements DNS Security Extensions (DNSSEC) and 
-			one does not.</t>
-            	
-            	<t>In the case of a DNSSEC validation failure, if an end user changes to a non-validating resolver they 
-			can subject themselves to increased security risks and threats against which 
-			DNSSEC may have provided protection.</t>
-				
-		<t>As a result, in order to protect their security, users SHOULD NOT switch to a non-validating 
-			resolver when a DNSSEC validation failure occurs.</t>
-    			</section>
-    			
-    			<section title='Recommendations for Validating Resolver Operators' 
+		<section title='Recommendations for Validating Resolver Operators' 
 				 anchor='Recommendations-for-Validating-Resolver-Operators' toc='include'>
             	<t>Since it is not recommended that end users change to non-validating resolvers, operators of validating 
 			resolvers may wish to consider what tools they might make available to their end users to assist 
@@ -274,6 +261,19 @@
 			to pickup the authoritative change immediately (rather than waiting until the TTL on a 
 			cached record expires).</t>
     			</section>
+		    
+		<section title='Security Considerations' anchor='Security-Considerations' toc='include'>
+            	<t>The use of a non-validating DNS recursive resolver is comparatively less secure than using
+			a validating resolver, since one implements DNS Security Extensions (DNSSEC) and 
+			one does not.</t>
+            	
+            	<t>In the case of a DNSSEC validation failure, if an end user changes to a non-validating resolver they 
+			can subject themselves to increased security risks and threats against which 
+			DNSSEC may have provided protection.</t>
+				
+		<t>As a result, in order to protect their security, users SHOULD NOT switch to a non-validating 
+			resolver when a DNSSEC validation failure occurs.</t>
+    		</section>
             	
             	<section title='Privacy Considerations' anchor='Privacy-Considerations' toc='include'>            	
             	<t>In the case of a DNSSEC validation failure, if an end user changes to a non-validating resolver they 
