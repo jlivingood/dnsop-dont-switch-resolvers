@@ -51,7 +51,7 @@
 		
 		<!-- END REFERENCE PROCESSING -->
 		
-    <rfc ipr='trust200902' docName='draft-livingood-dnsop-dont-switch-resolvers-03' category='info'>
+    <rfc ipr='trust200902' docName='draft-livingood-dnsop-dont-switch-resolvers-04' category='info'>
   	<!-- category values: std, bcp, info, exp, and historic
      ipr values: full3978, noModification3978, noDerivatives3978
      you can add the attributes updates="NNNN" and obsoletes="NNNN" 
@@ -70,12 +70,7 @@
 					Comcast 
 					</organization>
 					<address>
-						<postal>
-        					<city>Philadelphia</city> 
-        					<country>US</country>
-						</postal>
     					<email>jason_livingood@comcast.com</email>
-    					<uri>http://www.comcast.com</uri>
 					</address>
 				<!-- author role='editor' is an optional value here -->
 				</author>
@@ -182,7 +177,7 @@
 			and switches to a non-validating resolver, they may be subject to the risk of 
 			malware exposure, phishing attack, and so on. The root cause of a DNSSEC validation 
 		    	failure lies not with a recursive DNS operator but with the authoritative domain name 
-		    	owner or administrator <xref target="I-D.draft-livingood-dnsop-auth-dnssec-mistakes"/>.</t>
+		    	owner or administrator [I-D.draft-livingood-dnsop-auth-dnssec-mistakes]<!--<xref target="I-D.draft-livingood-dnsop-auth-dnssec-mistakes"/>-->.</t>
             </section>
             
             <section title='Comparison to Other DNS Misconfigurations' anchor='Comparison-to-Other-DNS-Misconfigurations' 
@@ -253,7 +248,7 @@
 			users to report possible DNS resolution issues.</t>
 				
 		<t>Resolver operators may also find it helpful to selectively use a Negative Trust Anchor 
-			<xref="RFC7646"/> to temporarily mitigate validation failures that are absolutely 
+			<xref target="RFC7646"/> to temporarily mitigate validation failures that are absolutely 
 			confirmed to be due to authoritative domain name administration error by that 
 			administrator. In addition, in select cases such as a very high traffic domain name, 
 			once an administrative DNS error or problem has been 
@@ -318,9 +313,14 @@
 				&RFC6781;
 				&RFC7646;
 				&RFC8446;
+			</references>
+
+			<references title='Informative References'>
 				&I-D.draft-livingood-dnsop-auth-dnssec-mistakes;
 			</references>
 
+
+			<!--&I-D.draft-livingood-dnsop-dont-switch-resolvers;-->
 			
             
 		<section title='Document Change Log'>
@@ -333,11 +333,12 @@
      		<t>WG-02: Addressed some feedback from Peter Koch on RFC 2119 text, changed from BCP to 
 			Informational since this is more a recommended practice, added a section with recommendations 
 			for operators.</t>
-     		<t>WG-03: Refreshed document</t>
+     		<t>WG-03 to 04: Refreshed document</t>
 		</section>
 
 		<section title='Open Issues'>
 			<t>[RFC Editor: This section is to be removed before publication]</t>
+			<t>Fix I-D xref</t>
 		</section>
 
 	</back>
