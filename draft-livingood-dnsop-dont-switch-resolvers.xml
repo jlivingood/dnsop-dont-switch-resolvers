@@ -13,7 +13,7 @@
 		<!ENTITY RFC6781 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6781.xml">
 		<!ENTITY RFC7646 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7646.xml">
 		<!ENTITY RFC8446 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8446.xml">
-		<!ENTITY I-D.draft-livingood-dnsop-auth-dnssec-mistakes SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-livingood-dnsop-auth-dnssec-mistakes-04.xml">
+		<!ENTITY I-D.draft-livingood-dnsop-auth-dnssec-mistakes SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-livingood-dnsop-auth-dnssec-mistakes-03.xml">
 		]>
 			 
 		<?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
