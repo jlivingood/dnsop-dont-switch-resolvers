@@ -11,6 +11,7 @@
 		<!ENTITY RFC5155 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5155.xml">
 		<!ENTITY RFC5914 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5914.xml">
 		<!ENTITY RFC6781 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6781.xml">
+		<!ENTITY RFC8446 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8446.xml">
 		]>
 		
 			 
@@ -154,34 +155,38 @@
 				recommend that users SHOULD NOT change DNS resolvers when DNSSEC 
 				validation failures occur. Such errors may be due to genuine security 
 				problems, which DNSSEC validation was designed to protect against. In the 
-				same way that a TLS certificate failure should not be bypassed, so too 
-				should DNSSEC validation failures not be bypassed.</t>
+				same way that a Transport Layer Security (TLS) <xref target='RFC8446'/> 
+				certificate failure should not be bypassed, so too 
+				DNSSEC validation failures should not be bypassed.</t>
 				
 			</section>
 			
-			<section title='Domain Validation Failures' anchor='Domain-Validation-Failures' toc='include'>
-			<t>A domain name can fail validation for two general reasons, an actual security failure such 
-				as due to an attack or compromise of some sort, or as a result of misconfiguration 
-				(mistake) on the part of an domain administrator. There is no way for end users to 
-				discern which of these issues has caused a DNSSEC-signed domain to fail validation, 
-				and end users should therefore assume that it may be due to an actual security 
-				problem.</t>
-			</section>
+	<section title='DNSSEC Validation Failures' anchor='DNSSEC-Validation-Failures' toc='include'>
+		<t>A domain name can fail DNSSEC validation for two general reasons: an actual security failure 
+			such as due to an attack or compromise of some sort, or as a result of misconfiguration 
+			(mistake) on the part of a domain administrator. There is no way for an average end user 
+			to discern which of these issues has caused a DNSSEC-signed domain to fail validation, 
+			and end users should therefore assume that it may be due to an actual security problem 
+			as the most conservative and security-protective approach.</t>
+	</section>
 			
             <section title='Misunderstanding DNSSEC Validation Failures' anchor='Misunderstanding-DNSSEC-Validation-Failures' 
 		     toc='include'>
-			<t>End users may incorrectly interpret the failure to reach a domain due to DNSSEC-related 
-				misconfiguration as their ISP or DNS resolver operator purposely blocking access to 
-				the domain, or as a performance-related failure on the part of their ISP. In reality, 
-				these failures may be due to a security issue of which the end user is not aware.</t>
+		<t>End users may incorrectly interpret the failure to reach a domain due to DNSSEC-related 
+			misconfiguration as their ISP or DNS resolver operator purposely blocking access to 
+			the domain, or as a performance-related failure on the part of that ISP or DNS resolver 
+			operator. In reality, these failures may be due to a security issue of which the end 
+			user is not aware. If a user ignores such a failure, such as by switching to a 
+		    	non-validating resolver, they may be subject to the risk of malware exposure, phishing 
+		    	attack, and so on.</t>
             </section>
             
             <section title='Comparison to Other DNS Misconfigurations' anchor='Comparison-to-Other-DNS-Misconfigurations' 
 		     toc='include'>
-			<t>Authoritative DNS-related mistakes and errors typically affect the entire Internet, and all 
-				DNS recursive resolver operators equally. So for example, in an A record is incorrect, 
-				an end user would get the incorrect record in a DNS response no matter what resolver 
-				they used.</t>
+		<t>Authoritative DNS-related mistakes and errors typically affect the entire Internet, and all 
+			DNS recursive resolver operators equally. So for example, in an A record is incorrect, 
+			an end user would get the incorrect record in a DNS response no matter what resolver 
+			they used.</t>
 			
 			<t>In contrast to this, DNSSEC-related mistakes, errors, or validation security failures would 
 				only affect end users of validating resolvers.</t>
@@ -267,6 +272,7 @@
 				&RFC5155;
 				&RFC5914;
 				&RFC6781;
+				&RFC8446;
 			</references>
 
 			
@@ -281,7 +287,7 @@
      		<t>WG-02: Addressed some feedback from Peter Koch on RFC 2119 text, changed from BCP to 
 			Informational since this is more a recommended practice, added a section with recommendations 
 			for operators.</t>
-     		<t>WG-03: Refreshed document and broadened beyond DNSSEC</t>
+     		<t>WG-03: Refreshed document</t>
 		</section>
 
 		<section title='Open Issues'>
