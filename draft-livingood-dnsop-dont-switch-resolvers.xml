@@ -12,8 +12,8 @@
 		<!ENTITY RFC5914 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5914.xml">
 		<!ENTITY RFC6781 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6781.xml">
 		<!ENTITY RFC8446 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8446.xml">
+		<!ENTITY I-D.draft-livingood-dnsop-auth-dnssec-mistakes SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-livingood-dnsop-auth-dnssec-mistakes-04.xml">
 		]>
-		
 			 
 		<?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
 			
@@ -108,7 +108,7 @@
         	<t>DNS Security Extensions (DNSSEC) validation by recursive DNS resolvers has been deployed 
 			at scale.  However, domain signing tools and processes are not yet as mature and 
 			reliable as is the case for non-DNSSEC-related domain administration tools and 
-			processes. This sometimes results in DNSSEC-validation failures, for which 
+			processes. This sometimes results in DNSSEC validation failures, for which 
 			operators of validating resolvers are often blamed. When these failures do 
 			occur, end users should not change to a non-validating DNS resolver, as that would 
 			downgrade their security. They should instead wait until the authoritative domain 
@@ -135,10 +135,10 @@
 			<t>DNS Security Extensions (DNSSEC) validation by recursive DNS resolvers has been deployed 
 			at scale.  However, domain signing tools and processes are not yet as mature and 
 			reliable as is the case for non-DNSSEC-related domain administration tools and 
-			processes. This sometimes results in DNSSEC-validation failures, for which 
+			processes. This sometimes results in DNSSEC validation failures, for which 
 			operators of validating resolvers are often blamed.</t>
 				
-			<t>When these failures do 
+			<t>When these DNSSEC validation failures do 
 			occur, end users SHOULD NOT change to a non-validating DNS resolver, as that would 
 			downgrade their security. They should instead wait until the authoritative domain 
 			operator updates their DNS records to resolve the error and then for that change to propagate 
@@ -147,26 +147,27 @@
 				
 			<t>This document is necessary because it has become commonplace for reporters, technical 
 				users, and others to recommend that people change to non-validating resolvers when 
-				a DNSSEC validation failure occurs. This practice actively downgrades user 
-				security and reduces the incentives for authoritative domain operators to 
-				improve their DNSSEC-related domain administration tools and processes.</t>
+				a DNSSEC validation failure occurs. This is NOT a recommended practice, it 
+				actively downgrades user security, and it reduces the incentives for 
+				authoritative domain operators to improve their DNSSEC-related domain 
+				administration tools and processes.</t>
 				
 			<t>As a result, this document provides an authoritative reference point to 
 				recommend that users SHOULD NOT change DNS resolvers when DNSSEC 
 				validation failures occur. Such errors may be due to genuine security 
 				problems, which DNSSEC validation was designed to protect against. In the 
 				same way that a Transport Layer Security (TLS) <xref target='RFC8446'/> 
-				certificate failure should not be bypassed, so too 
-				DNSSEC validation failures should not be bypassed.</t>
+				certificate failure should not be bypassed or ignored, so too that 
+				DNSSEC validation failures should not be bypassed or ignored.</t>
 				
 			</section>
 			
-	<section title='DNSSEC Validation Failures' anchor='DNSSEC-Validation-Failures' toc='include'>
+	<section title='Reasons for DNSSEC Validation Failure' anchor='DNSSEC-Validation-Failure-Reasons' toc='include'>
 		<t>A domain name can fail DNSSEC validation for two general reasons: an actual security failure 
 			such as due to an attack or compromise of some sort, or as a result of misconfiguration 
 			(mistake) on the part of a domain administrator. There is no way for an average end user 
 			to discern which of these issues has caused a DNSSEC-signed domain to fail validation, 
-			and end users should therefore assume that it may be due to an actual security problem 
+			and so end users should therefore assume that it is due to an actual security problem 
 			as the most conservative and security-protective approach.</t>
 	</section>
 			
@@ -176,9 +177,11 @@
 			misconfiguration as their ISP or DNS resolver operator purposely blocking access to 
 			the domain, or as a performance-related failure on the part of that ISP or DNS resolver 
 			operator. In reality, these failures may be due to a security issue of which the end 
-			user is not aware. If a user ignores such a failure, such as by switching to a 
-		    	non-validating resolver, they may be subject to the risk of malware exposure, phishing 
-		    	attack, and so on.</t>
+			user is not aware. If a user ignores such a failure, or is instructed to ignore it, 
+			and switches to a non-validating resolver, they may be subject to the risk of 
+			malware exposure, phishing attack, and so on. The root cause of a DNSSEC validation 
+		    	failure lies not with a recursive DNS operator but with the authoritative domain name 
+		    	owner or administrator <xref target="I-D.draft-livingood-dnsop-auth-dnssec-mistakes"/>.</t>
             </section>
             
             <section title='Comparison to Other DNS Misconfigurations' anchor='Comparison-to-Other-DNS-Misconfigurations' 
@@ -273,6 +276,7 @@
 				&RFC5914;
 				&RFC6781;
 				&RFC8446;
+				&I-D.draft-livingood-dnsop-auth-dnssec-mistakes;
 			</references>
 
 			
