@@ -138,21 +138,24 @@
 			operators of validating resolvers are often blamed.</t>
 				
 			<t>When these failures do 
-			occur, end users should not change to a non-validating DNS resolver, as that would 
+			occur, end users SHOULD NOT change to a non-validating DNS resolver, as that would 
 			downgrade their security. They should instead wait until the authoritative domain 
-			operator updates their DNS records to resolve the error and that change propagates 
+			operator updates their DNS records to resolve the error and then for that change to propagate 
 			across the Internet's DNS resolvers, the timing of which may be dependent upon 
 			the Time To Live (TTL) settings in the old and/or erroneous DNS resource records.</t>
 				
 			<t>This document is necessary because it has become commonplace for reporters, technical 
-				users, and others to recommend that users change to non-validating resolvers when 
+				users, and others to recommend that people change to non-validating resolvers when 
 				a DNSSEC validation failure occurs. This practice actively downgrades user 
 				security and reduces the incentives for authoritative domain operators to 
 				improve their DNSSEC-related domain administration tools and processes.</t>
 				
 			<t>As a result, this document provides an authoritative reference point to 
-				explain that users SHOULD NOT change DNS resolvers when DNSSEC 
-				validation failures occur. </t>
+				recommend that users SHOULD NOT change DNS resolvers when DNSSEC 
+				validation failures occur. Such errors may be due to genuine security 
+				problems, which DNSSEC validation was designed to protect against. In the 
+				same way that a TLS certificate failure should not be bypassed, so too 
+				should DNSSEC validation failures not be bypassed.</t>
 				
 			</section>
 			
