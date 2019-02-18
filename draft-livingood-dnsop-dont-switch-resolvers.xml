@@ -49,7 +49,7 @@
 		
 		<!-- END REFERENCE PROCESSING -->
 		
-    <rfc ipr='trust200902' docName='draft-livingood-dnsop-dont-switch-resolvers-04' category='info'>
+    <rfc ipr='trust200902' docName='draft-livingood-dnsop-dont-switch-resolvers-03' category='info'>
   	<!-- category values: std, bcp, info, exp, and historic
      ipr values: full3978, noModification3978, noDerivatives3978
      you can add the attributes updates="NNNN" and obsoletes="NNNN" 
@@ -95,19 +95,25 @@
 			<keyword>Request for Comments</keyword>
 			<keyword>I-D</keyword>
 			<keyword>Internet-Draft</keyword>
-    		<keyword>Comcast</keyword>
-    		<keyword>ISP</keyword>
-    		<keyword>Internet Service Provider</keyword>
-    		<keyword>DNS</keyword>
-    		<keyword>DNSSEC</keyword>
-    		<keyword>Negative Trust Anchors</keyword>
+    			<keyword>Comcast</keyword>
+    			<keyword>ISP</keyword>
+    			<keyword>Internet Service Provider</keyword>
+    			<keyword>DNS</keyword>
+    			<keyword>DNSSEC</keyword>
+			<keyword>DNSSEC-Validation</keyword>
+    			<keyword>Negative Trust Anchors</keyword>
 				
         	<abstract>
-        	<t>DNS Security Extensions (DNSSEC) are being widely deployed, particularly via validating resolvers. 
-			However, domain signing tools and processes are not yet as mature and reliable as is the case 
-			for non-DNSSEC-related domain administration tools and processes. As a result, some DNSSEC 
-			validation failures may occur. When these failures do occur, end users should not change to 
-			a non-validating DNS resolver.</t>
+        	<t>DNS Security Extensions (DNSSEC) validation by recursive DNS resolvers has been deployed 
+			at scale.  However, domain signing tools and processes are not yet as mature and 
+			reliable as is the case for non-DNSSEC-related domain administration tools and 
+			processes. This sometimes results in DNSSEC-validation failures, for which 
+			operators of validating resolvers are often blamed. When these failures do 
+			occur, end users should not change to a non-validating DNS resolver, as that would 
+			downgrade their security. They should instead wait until the authoritative domain 
+			operator updates their DNS records to resolve the error and that change propagates 
+			across the Internet's DNS resolvers, the timing of which may be dependent upon 
+			the Time To Live (TTL) settings in the old and/or erroneous DNS resource records.</t>
     		</abstract>
 			
 			<!-- END META-DATA DECLARATIONS -->
@@ -124,12 +130,30 @@
 				<xref target='RFC4033'/> <xref target='RFC4034'/> <xref target='RFC4035'/> 
 				<xref target='RFC4398'/> <xref target='RFC4509'/> <xref target='RFC6781'/> 
 				<xref target='RFC5155'/>.</t>
-								
-			<t>DNSSEC has now entered widespread deployment. However, domain signing tools and processes 
-				are not yet as mature and reliable as is the case for non-DNSSEC-related domain 
-				administration tools and processes. As a result, some DNSSEC validation failures 
-				may occur. When these failures do occur, end users should not change to a 
-				non-validating DNS resolver.</t>
+				
+			<t>DNS Security Extensions (DNSSEC) validation by recursive DNS resolvers has been deployed 
+			at scale.  However, domain signing tools and processes are not yet as mature and 
+			reliable as is the case for non-DNSSEC-related domain administration tools and 
+			processes. This sometimes results in DNSSEC-validation failures, for which 
+			operators of validating resolvers are often blamed.</t>
+				
+			<t>When these failures do 
+			occur, end users should not change to a non-validating DNS resolver, as that would 
+			downgrade their security. They should instead wait until the authoritative domain 
+			operator updates their DNS records to resolve the error and that change propagates 
+			across the Internet's DNS resolvers, the timing of which may be dependent upon 
+			the Time To Live (TTL) settings in the old and/or erroneous DNS resource records.</t>
+				
+			<t>This document is necessary because it has become commonplace for reporters, technical 
+				users, and others to recommend that users change to non-validating resolvers when 
+				a DNSSEC validation failure occurs. This practice actively downgrades user 
+				security and reduces the incentives for authoritative domain operators to 
+				improve their DNSSEC-related domain administration tools and processes.</t>
+				
+			<t>As a result, this document provides an authoritative reference point to 
+				explain that users SHOULD NOT change DNS resolvers when DNSSEC 
+				validation failures occur. </t>
+				
 			</section>
 			
 			<section title='Domain Validation Failures' anchor='Domain-Validation-Failures' toc='include'>
@@ -254,8 +278,7 @@
      		<t>WG-02: Addressed some feedback from Peter Koch on RFC 2119 text, changed from BCP to 
 			Informational since this is more a recommended practice, added a section with recommendations 
 			for operators.</t>
-     		<t>WG-03: I should really work on this draft soon</t>
-        <t>WG-04: Refreshed document and broadened beyond DNSSEC</t>
+     		<t>WG-03: Refreshed document and broadened beyond DNSSEC</t>
 		</section>
 
 		<section title='Open Issues'>
