@@ -11,6 +11,7 @@
 		<!ENTITY RFC5155 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5155.xml">
 		<!ENTITY RFC5914 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5914.xml">
 		<!ENTITY RFC6781 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6781.xml">
+		<!ENTITY RFC7646 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7646.xml">
 		<!ENTITY RFC8446 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8446.xml">
 		<!ENTITY I-D.draft-livingood-dnsop-auth-dnssec-mistakes SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-livingood-dnsop-auth-dnssec-mistakes-04.xml">
 		]>
@@ -239,13 +240,15 @@
            		
            		<section title='Security Considerations' anchor='Security-Considerations' toc='include'>
             	<t>The use of a non-validating DNS recursive resolver is comparatively less secure than using
-			a validating resolver, since one implements DNS Security Extensions and one does not.</t>
+			a validating resolver, since one implements DNS Security Extensions (DNSSEC) and 
+			one does not.</t>
             	
             	<t>In the case of a DNSSEC validation failure, if an end user changes to a non-validating resolver they 
-			may subject themselves to increased security risks and threats against which DNS Security 
-			Extensions may have provided protection.</t>
+			can subject themselves to increased security risks and threats against which 
+			DNSSEC may have provided protection.</t>
 				
-		<t>Users SHOULD NOT switch to a non-validating resolver when a DNSSEC validation failure occurs.</t>
+		<t>As a result, in order to protect their security, users SHOULD NOT switch to a non-validating 
+			resolver when a DNSSEC validation failure occurs.</t>
     			</section>
     			
     			<section title='Recommendations for Validating Resolver Operators' 
@@ -253,17 +256,35 @@
             	<t>Since it is not recommended that end users change to non-validating resolvers, operators of validating 
 			resolvers may wish to consider what tools they might make available to their end users to assist 
 			in these cases. For example, there may be a DNS looking glass that enables someone to use a web 
-			page or other tool to remotely check DNS resolution on the operator's servers, as well as 
+			page or other tool to remotely (including from a different network) check DNS resolution on 
+			the operator's servers, as well as 
 			possibly another operator's servers. Such a web page or tool may also provide a link to 
 			independent third party sites or tools that can confirm whether or not a DNSSEC-related error is 
 			present, of which several exist today (e.g. <eref target="http://dnsviz.net/">DNSViz</eref>, 
 			<eref target="http://dnssec-debugger.verisignlabs.com/">Verisign DNSSEC Debugger</eref>). 
 			Finally, the operator may also wish to consider a web page form or other tool to enable end 
 			users to report possible DNS resolution issues.</t>
+				
+		<t>Resolver operators may also find it helpful to selectively use a Negative Trust Anchor 
+			<xref="RFC7646"/> to temporarily mitigate validation failures that are absolutely 
+			confirmed to be due to authoritative domain name administration error by that 
+			administrator. In addition, in select cases such as a very high traffic domain name, 
+			once an administrative DNS error or problem has been 
+			fixed a resolver may consider clearing the cache of their recursive resolvers in order 
+			to pickup the authoritative change immediately (rather than waiting until the TTL on a 
+			cached record expires).</t>
     			</section>
             	
-            	<section title='Privacy Considerations' anchor='Privacy-Considerations' toc='include'>
-            	<t>There are no privacy considerations in this document.</t>
+            	<section title='Privacy Considerations' anchor='Privacy-Considerations' toc='include'>            	
+            	<t>In the case of a DNSSEC validation failure, if an end user changes to a non-validating resolver they 
+			can subject themselves to increased security risks and threats against which 
+			DNSSEC may have provided protection. This can include threats to their privacy, such as 
+			by unwittingly visiting a phishing site and sharing sensitive data or other private 
+			information with a malicious party or some party other than that which was 
+			originally intended.</t>
+				
+		<t>As a result, in order to protect their privacy, users SHOULD NOT switch to a non-validating 
+			resolver when a DNSSEC validation failure occurs.</t>
             	</section>
             	
             	<section title='IANA Considerations' anchor='IANA-Considerations' toc='include'>
@@ -295,6 +316,7 @@
 				&RFC5155;
 				&RFC5914;
 				&RFC6781;
+				&RFC7646;
 				&RFC8446;
 				&I-D.draft-livingood-dnsop-auth-dnssec-mistakes;
 			</references>
