@@ -1,0 +1,1 @@
+# dnsop-dont-switch-resolvers
