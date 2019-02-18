@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
+	<!-- References are listed here so that they can be called via Entity attributes later -->
+		<!ENTITY RFC1034 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.1034.xml">
+		<!ENTITY RFC1035 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.1035.xml">
+		<!ENTITY RFC4033 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4033.xml">
+		<!ENTITY RFC4034 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4034.xml">
+		<!ENTITY RFC4035 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4035.xml">
+		<!ENTITY RFC4398 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4398.xml">
+		<!ENTITY RFC4509 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4509.xml">
+		<!ENTITY RFC5155 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5155.xml">
+		<!ENTITY RFC5914 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5914.xml">
+		<!ENTITY RFC6781 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6781.xml">
+		]>
+		
+			 
+		<?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
+			
+			
+		<!-- PROCESSING INSTRUCTIONS - GENERAL -->
+		<!-- EACH ONE STARTS WITH '?' BELOW -->
+		
+		<!-- give errors on I-D nits and perform DTD validation -->
+		<!-- control the table of contents (ToC) -->
+		<?rfc strict='yes' ?>
+		
+		<?rfc toc='yes'?>
+		<!-- generate a ToC -->
+
+		<!-- the number of levels of subsections in ToC. default: 3 -->
+		<?rfc tocdepth='4'?>
+		
+		<!-- END GENERAL PROCESSING -->
+		
+		<!-- PROCESSING INSTRUCTIONS - CONTROL OF REFERENCES -->
+		
+		<!-- use symbolic references tags, i.e, [RFC2119] instead of [1] -->
+		<?rfc symrefs='yes'?>
+		
+		<!-- sort the reference entries alphabetically -->
+		<!-- control vertical white space -->
+		<?rfc sortrefs='yes' ?>
+		
+		<!-- do not start each main section on a new page -->
+		<?rfc compact='yes' ?>
+				
+		<!-- keep one blank line between list items -->
+		<?rfc subcompact='no' ?>
+		
+		<!-- END REFERENCE PROCESSING -->
+		
+    <rfc ipr='trust200902' docName='draft-livingood-dnsop-dont-switch-resolvers-04' category='info'>
+  	<!-- category values: std, bcp, info, exp, and historic
+     ipr values: full3978, noModification3978, noDerivatives3978
+     you can add the attributes updates="NNNN" and obsoletes="NNNN" 
+     they will automatically be output with "(if approved)" -->
+		
+			<!-- FRONT SECTION -->
+    	<front>
+				<title abbrev='Do Not Change Resolvers'>
+				In Case of DNSSEC Validation Failures, Do Not Change Resolvers 
+				</title>
+				
+		    <!-- add role='editor' attribute to author tag below for the editors if appropriate -->
+
+        		<author initials='J.' surname='Livingood' fullname='Jason Livingood'>
+					<organization abbrev='Comcast'>
+					Comcast 
+					</organization>
+					<address>
+						<postal>
+        					<city>Philadelphia</city> 
+        					<country>US</country>
+						</postal>
+    					<email>jason_livingood@comcast.com</email>
+    					<uri>http://www.comcast.com</uri>
+					</address>
+				<!-- author role='editor' is an optional value here -->
+				</author>
+				
+        	<date day='18' month='February' year='2019'/>
+				
+			<!-- META-DATA DECLARATIONS -->
+    		<area>Operations and Management Area</area>
+				
+			<!-- WG name at the upperleft corner of the doc; 'Internet Engineering Task Force' is fine for individual submissions.  -->
+    		<workgroup>Domain Name System Operations</workgroup>
+    
+		    <!-- Keywords will be incorporated into HTML output files in a meta tag but they have no effect on text or nroff output. If you submit your draft to the RFC Editor, the keywords will be used for the search engine. -->
+			
+			<keyword>RFC</keyword>
+			<keyword>Request for Comments</keyword>
+			<keyword>I-D</keyword>
+			<keyword>Internet-Draft</keyword>
+    		<keyword>Comcast</keyword>
+    		<keyword>ISP</keyword>
+    		<keyword>Internet Service Provider</keyword>
+    		<keyword>DNS</keyword>
+    		<keyword>DNSSEC</keyword>
+    		<keyword>Negative Trust Anchors</keyword>
+				
+        	<abstract>
+        	<t>DNS Security Extensions (DNSSEC) are being widely deployed, particularly via validating resolvers. However, domain signing tools and processes are not yet as mature and reliable as is the case for non-DNSSEC-related domain administration tools and processes. As a result, some DNSSEC validation failures may occur. When these failures do occur, end users should not change to a non-validating DNS resolver.</t>
+    		</abstract>
+			
+			<!-- END META-DATA DECLARATIONS -->
+
+			</front>
+			<!-- END FRONT SECTION -->
+			
+			<!-- MIDDLE SECTION -->
+			<middle>
+		
+			<section anchor='intro' title='Introduction' toc='include'>
+			<t>The Domain Name System (DNS), DNS Security Extensions (DNSSEC), and related operational practices are defined extensively <xref target='RFC1034'/> <xref target='RFC1035'/> <xref target='RFC4033'/> <xref target='RFC4034'/> <xref target='RFC4035'/> <xref target='RFC4398'/> <xref target='RFC4509'/> <xref target='RFC6781'/> <xref target='RFC5155'/>.</t>
+								
+			<t>DNSSEC has now entered widespread deployment. However, domain signing tools and processes are not yet as mature and reliable as is the case for non-DNSSEC-related domain administration tools and processes. As a result, some DNSSEC validation failures may occur. When these failures do occur, end users should not change to a non-validating DNS resolver.</t>
+			</section>
+			
+			<section title='Domain Validation Failures' anchor='Domain-Validation-Failures' toc='include'>
+			<t>A domain name can fail validation for two general reasons, an actual security failure such as due to an attack or compromise of some sort, or as a result of misconfiguration (mistake) on the part of an domain administrator. There is no way for end users to discern which of these issues has caused a DNSSEC-signed domain to fail validation, and end users should therefore assume that it may be due to an actual security problem.</t>
+			</section>
+			
+            <section title='Misunderstanding DNSSEC Validation Failures' anchor='Misunderstanding-DNSSEC-Validation-Failures' toc='include'>
+			<t>End users may incorrectly interpret the failure to reach a domain due to DNSSEC-related misconfiguration as their ISP or DNS resolver operator purposely blocking access to the domain, or as a performance-related failure on the part of their ISP. In reality, these failures may be due to a security issue of which the end user is not aware.</t>
+            </section>
+            
+            <section title='Comparison to Other DNS Misconfigurations' anchor='Comparison-to-Other-DNS-Misconfigurations' toc='include'>
+			<t>Authoritative DNS-related mistakes and errors typically affect the entire Internet, and all DNS recursive resolver operators equally. So for example, in an A record is incorrect, an end user would get the incorrect record in a DNS response no matter what resolver they used.</t>
+			
+			<t>In contrast to this, DNSSEC-related mistakes, errors, or validation security failures would only affect end users of validating resolvers.</t>
+            </section>
+            
+            <section title='Switching to a Non-Validating Resolver is NOT Recommended' anchor='Switching-to-a-Non-Validating-Resolver-is-NOT-Recommended' toc='include'>
+			<t>As noted in <xref target="Misunderstanding-DNSSEC-Validation-Failures"/> some end users may not understand why a domain fails to validate on one network but not another (or with one DNS resolver but not another) <xref target='Comparison-to-Other-DNS-Misconfigurations'/>. As a result, they may consider switching to an alternative, non-validating resolver themselves. But if a domain fails DNSSEC validation and is inaccessible, this could very well be due to a security-related issue. Changing to a non-validating resolver is a critical security downgrade and is not well advised.</t>
+			
+			<t>As a recommended best practice: In order to be as safe and secure as possible, end users should not change to DNS servers that do not perform DNSSEC validation as a workaround.</t>
+			
+			<t>Even if a website in a domain seems to look "normal" and valid, according to the DNSSEC protocol, that domain is not secure. Domains that fail DNSSEC validation may fail due to an actual security incident or compromise, and may be in control of hackers or there could be other significant security issues with the domain. Thus, switching to a non-validating resolver to restore access to a domain that fails DNSSEC validation is NOT recommended and is potentially harmful to end user security.</t>
+            </section>
+            
+            <section title='Other Considerations' anchor='Other-Considerations' toc='include'>
+           		
+           		<section title='Security Considerations' anchor='Security-Considerations' toc='include'>
+            	<t>The use of a non-validating DNS recursive resolver has comparatively less security capabilities than a validating resolver, since one implements DNS Security Extensions and one does not.</t>
+            	
+            	<t>In the case of a DNSSEC validation failure, if an end user changes to a non-validating resolver they may subject themselves to increased security risks and threats against which DNS Security Extensions may have provided protection.</t>
+    			</section>
+    			
+    			<section title='Recommendations for Validating Resolver Operators' anchor='Recommendations-for-Validating-Resolver-Operators' toc='include'>
+            	<t>Since it is not recommended that end users change to non-validating resolvers, operators of validating resolvers may wish to consider what tools they might make available to their end users to assist in these cases. For example, there may be a DNS looking glass that enables someone to use a web page or other tool to remotely check DNS resolution on the operator's servers, as well as possibly another operator's servers. Such a web page or tool may also provide a link to independent third party sites or tools that can confirm whether or not a DNSSEC-related error is present, of which several exist today (e.g. <eref target="http://dnsviz.net/">DNSViz</eref>, <eref target="http://dnssec-debugger.verisignlabs.com/">Verisign DNSSEC Debugger</eref>). Finally, the operator may also wish to consider a web page form or other tool to enable end users to report possible DNS resolution issues.</t>
+    			</section>
+            	
+            	<section title='Privacy Considerations' anchor='Privacy-Considerations' toc='include'>
+            	<t>There are no privacy considerations in this document.</t>
+            	</section>
+            	
+            	<section title='IANA Considerations' anchor='IANA-Considerations' toc='include'>
+            	<t>There are no IANA considerations in this document.</t>
+        		</section>
+        		
+           	</section>
+            
+			<section title='Acknowledgements' toc='include'>
+        	<t>- William Brown</t>
+        	<t>- Peter Koch</t>
+      		</section>	
+		
+		
+		</middle>
+		<!-- END MIDDLE SECTION -->
+			
+		<!-- BACK SECTION -->
+		<back>
+			
+			<references title='Normative References'>
+				&RFC1034;
+				&RFC1035;
+				&RFC4033;
+				&RFC4034;
+				&RFC4035;
+				&RFC4398;
+				&RFC4509;
+				&RFC5155;
+				&RFC5914;
+				&RFC6781;
+			</references>
+
+			
+            
+		<section title='Document Change Log'>
+	 		<t>[RFC Editor: This section is to be removed before publication]</t>
+     		<t>Individual-00: First version published as an individual draft.</t>
+     		<t>Individual-01: Fixed nits identified by William Brown</t>
+     		<t>Individual-02: Updated prior to IETF-91</t>
+     		<t>WG-00: Renamed at request of DNSOP co-chairs</t>
+     		<t>WG-01: Updated doc to keep it from expiring</t>
+     		<t>WG-02: Addressed some feedback from Peter Koch on RFC 2119 text, changed from BCP to Informational since this is more a recommended practice, added a section with recommendations for operators.</t>
+     		<t>WG-03: I should really work on this draft soon</t>
+        <t>WG-04: Refreshed document and broadened beyond DNSSEC</t>
+		</section>
+
+		<section title='Open Issues'>
+			<t>[RFC Editor: This section is to be removed before publication]</t>
+		</section>
+
+	</back>
+	<!-- END BACK SECTION -->
+
+    </rfc>
+
+		
+		<!-- FOR REFERENCE -->
+		<!-- less than is &lt -->
+		<!-- ampersand is &amp -->
+		<!-- apostrophe is &apos -->
+		<!-- quotation is &quot -->
